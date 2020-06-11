@@ -2,7 +2,6 @@ package kr.co.jboard1.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class DBConfig {
 
