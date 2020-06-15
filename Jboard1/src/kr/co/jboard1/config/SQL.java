@@ -3,6 +3,8 @@ package kr.co.jboard1.config;
 public class SQL {
 
 	// 회원 관련
+	public final static String TERMS = "SELECT * FROM `JBOARD_TERMS`";
+	
 	public final static String INSERT_REG  = "INSERT INTO `JBOARD_MEMBER` SET "
 											+ "`uid`= ?, "
 											+ "`pass`=PASSWORD(?), "
@@ -39,12 +41,21 @@ public class SQL {
 												+ "ORDER BY `seq` DESC "
 												+ "LIMIT ?, 10";
 	
+	public final static String SELECT_ARTICLE_MAX_SEQ = "SELECT MAX(`seq`) FROM `JBOARD_ARTICLE`";
+	
 	public final static String INSERT_ARTICLE = "INSERT INTO `JBOARD_ARTICLE` SET "
 												+ "`title`=?, "
 												+ "`content`=?, "
+												+ "`file`=?, "
 												+ "`uid`=?, "
 												+ "`regip`=?, "
-												+ "`rdate`=NOW()";		   
+												+ "`rdate`=NOW()";		  
+	
+	public final static String INSERT_FILE = "INSERT INTO `JBOARD_FILE` SET "
+												+ "`parent`=?, "
+												+ "`oldName`=?, "
+												+ "`newName`=?, "
+												+ "`rdate`=NOW()";
 	
 	public final static String SELECT_COMMENTS = "SELECT a.*, b.nick FROM `JBOARD_ARTICLE` AS a "
 												+ "JOIN `JBOARD_MEMBER` AS b "
