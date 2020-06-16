@@ -16,6 +16,14 @@ public class ArticleBean {
 	
 	//추가필드
 	private String Nick;
+	private FileBean fileBean;
+	
+	public FileBean getFileBean() {
+		return fileBean;
+	}
+	public void setFileBean(FileBean fileBean) {
+		this.fileBean = fileBean;
+	}
 	
 	public String getNick() {
 		return Nick;

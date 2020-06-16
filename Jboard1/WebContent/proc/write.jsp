@@ -28,10 +28,13 @@
 	String fname   = mRequest.getFilesystemName("file");
 	String regip   = request.getRemoteAddr();
 	
-	int hasFile = (fname != null) ? 1 : 0;
+	int hasFile = (fname != null) ? 1 : 0; 
 	
 		// 1, 2단계
 		Connection conn = DBConfig.getConnection();
+
+		//트랜젝션 시작(begin)
+		conn.setAutoCommit(false); //수동으로 커밋(쿼리를 전송)하겠다 이말이야.
 		
 		// 3단계
 		PreparedStatement psmt = conn.prepareStatement(SQL.INSERT_ARTICLE);
@@ -59,7 +62,7 @@
 		int i = fname.lastIndexOf("."); //뒤에서 부터 .의 인덱스 값을 구함
 		String ext = fname.substring(i);  // 확장자랑 파일이름 구분(.을 기준으로)
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss_"); //파일 코드화를 위해 날짜 만들기
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss_"); //파일 코드화를 위해 날짜로 이름 만들기
 		String now = sdf.format(new Date()); 
 		
 		String newName = now + uid + ext; // 파일명을 날짜랑 아이디로 만들어서 코드화(겹치지않게)
@@ -81,10 +84,13 @@
 		psmtFile.executeUpdate();
 		psmtFile.close();
 	}
-			
-	// 6단계
-	psmt.close();
-	conn.close();
+		
+		//트랜젝션 끝(실질적인 쿼리 실행)
+		conn.commit();
+	
+		// 6단계
+		psmt.close();
+		conn.close();
 	
 	// 리다이렉트
 	response.sendRedirect("/Jboard1/list.jsp");

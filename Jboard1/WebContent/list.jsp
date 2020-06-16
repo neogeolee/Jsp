@@ -38,6 +38,9 @@
 	//1,2 단계
 	Connection conn = DBConfig.getConnection();
 	
+	//트랜젝션 시작
+	conn.setAutoCommit(false);
+	
 	//전체 게시물 갯수 구하기
 	PreparedStatement psmtCount = conn.prepareStatement(SQL.SELECT_TOTAL_COUNT);
 	ResultSet rsCount = psmtCount.executeQuery();
@@ -85,6 +88,9 @@
 		
 		articles.add(article);
 	}
+	
+	//트랜젝션
+	conn.commit();
 	
 	//6단계
 	rsCount.close();
