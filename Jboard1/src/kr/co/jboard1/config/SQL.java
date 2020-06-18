@@ -3,6 +3,10 @@ package kr.co.jboard1.config;
 public class SQL {
 
 	// 회원 관련
+	public final static String SELECT_CHECK_UID ="SELECT COUNT(`uid`) FROM `JBOARD_MEMBER` WHERE `uid`=?";
+	
+	public final static String SELECT_CHECK_NICK ="SELECT COUNT(`nick`) FROM `JBOARD_MEMBER` WHERE `nick`=?";
+	
 	public final static String TERMS = "SELECT * FROM `JBOARD_TERMS`";
 	
 	public final static String INSERT_REG  = "INSERT INTO `JBOARD_MEMBER` SET "
