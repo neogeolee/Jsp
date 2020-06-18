@@ -1,34 +1,35 @@
 <%@page import="com.google.gson.JsonObject"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="config.DBConfig"%>
+<%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="config.DBConfig"%>
 <%@ page contentType="application/json;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
-
-	String uid = request.getParameter("uid");
-	String name = request.getParameter("name");
-	String hp = request.getParameter("hp");
-	String pos = request.getParameter("pos");
-	String dep = request.getParameter("dep");
+	String uid   = request.getParameter("uid");
+	String name  = request.getParameter("name");
+	String hp    = request.getParameter("hp");
+	String pos   = request.getParameter("pos");
+	String dep   = request.getParameter("dep");
 	String rdate = request.getParameter("rdate");
-	
 	Connection conn = DBConfig.getConnection();
-	PreparedStatement psmt = conn.prepareStatement("INSERT INTO `MEMBER` SET `uid`=?, `name`=?, `hp`=?, `pos`=?, `dep`=?, `rdate`=?");
-	psmt.setString(1, uid);
-	psmt.setString(2, name);
-	psmt.setString(3, hp);
-	psmt.setString(4, pos);
-	psmt.setString(5, dep);
-	psmt.setString(6, rdate);
+	Statement stmt = conn.createStatement();
 	
-	int result = psmt.executeUpdate();
 	
-	psmt.close();
+	String sql  = "INSERT INTO `MEMBER` SET ";
+		   sql += "`uid`='"+uid+"', ";
+		   sql += "`name`='"+name+"', ";
+		   sql += "`hp`='"+hp+"', ";
+		   sql += "`pos`='"+pos+"', ";
+		   sql += "`dep`="+dep+", ";
+		   sql += "`rdate`='"+rdate+"';";
+		   
+	// INSERT 성공시 리턴값 1
+	int result = stmt.executeUpdate(sql);
+	
+	stmt.close();
 	conn.close();
 	
 	JsonObject json = new JsonObject();
 	json.addProperty("result", result);
-	
-	out.println(json);
+	out.println(json);	
 %>

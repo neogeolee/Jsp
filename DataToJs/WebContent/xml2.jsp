@@ -20,25 +20,25 @@
 	
 	while(rs.next()){
 		MemberBean mb = new MemberBean();
-		
 		mb.setUid(rs.getString(1));
 		mb.setName(rs.getString(2));
 		mb.setHp(rs.getString(3));
 		mb.setPos(rs.getString(4));
 		mb.setDep(rs.getInt(5));
-		mb.setRdate(rs.getString(6));
+		mb.setRdate(rs.getString(6));		
 		
 		memberList.add(mb);
 	}
+	
 	rs.close();
 	stmt.close();
 	conn.close();
-	
-	// 2) XML 생성하기 -편리한 XML 동적태그 생성을 위한 JDOM 라이브러리 사용
+	// 2) XML 생성하기 - 편리한 XML 동적태그 생성을 위한 JDOM 라이브러리 사용
 	Document doc = new Document();
 	Element members = new Element("members");
 	
 	for(MemberBean mb : memberList){
+		
 		Element member = new Element("member");
 		Element uid    = new Element("uid");
 		Element name   = new Element("name");
@@ -51,7 +51,7 @@
 		name.setText(mb.getName());
 		hp.setText(mb.getHp());
 		pos.setText(mb.getPos());
-		dep.setText(""+mb.getDep()); //숫자를 문자열
+		dep.setText(""+mb.getDep());
 		rdate.setText(mb.getRdate());
 		
 		member.addContent(uid);
@@ -61,13 +61,11 @@
 		member.addContent(dep);
 		member.addContent(rdate);
 		
-		members.addContent(member);
+		members.addContent(member);		
 	}
-	// xml문서의 루트엘레먼트로 members 태그 설정
-	doc.setRootElement(members);
-	
+	// xml문서의 루트 엘레먼트로 members 태그 설정
+	doc.setRootElement(members);	
 	// 3) XML 출력하기
-	String xml = new XMLOutputter(Format.getPrettyFormat()).outputString(doc);
+	String xml = new XMLOutputter(Format.getPrettyFormat()).outputString(doc);  
 	out.print(xml);
-	
 %>
