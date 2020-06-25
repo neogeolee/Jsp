@@ -103,7 +103,7 @@
 	  $('#summernote').summernote({
 		  airmode: true,
 		  focus: false,
-		  'disable'
+		  'disable';
 	  });
 	});
 </script>
