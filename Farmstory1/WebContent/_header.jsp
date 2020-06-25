@@ -3,19 +3,30 @@
 <% 
 	//세션체크 및  사용자 정보객체 구하기
 	MemberBean mb = (MemberBean) session.getAttribute("member");
+
+	String code = request.getParameter("code");
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>팜스토리</title>
-    <link rel="stylesheet" href="/Farmstory1/css/style.css"/>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">    
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Farmstory1/css/style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><!--구글 제이쿼리 삽입-->
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <style>
-       
-    </style>
+  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script>
+    	var code = <%= code %>;
+    	if(code == '101'){
+    		alert('로그인을 먼저하셔야합니다.');
+    		location.href = '/Farmstory1/user/login.jsp';
+    	}
+    	
+    </script>
 </head>
 <body>
     <div id="wrapper">

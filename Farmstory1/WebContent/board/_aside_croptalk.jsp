@@ -15,7 +15,7 @@
                   </ul>
               </aside>
               <article>
-	                 <nav><img src="../img/sub_nav_tit_cate3_tit_<%=cate %>.png" alt="농작물이야기">
+	                 <nav><img src="../img/sub_nav_tit_cate3_tit_<%= cate %>.png" alt="농작물이야기">
                   <p>
                       HOME > 농작물이야기 > 
                        <% if(cate.equals("croptalk")){ %>
