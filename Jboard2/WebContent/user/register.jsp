@@ -13,6 +13,8 @@
     <script src="/Jboard2/js/checkPass.js"></script>
     <script>
     	//유효성(validation) 검증
+    	$(function(){
+    	
     	$('.register > form').submit(function(){
     		//아이디 중복여부 확인
     		if(!isUidOk){
@@ -47,6 +49,7 @@
     		//최종 데이터 확인완료
     		return true;
     	});
+   	});
     </script>
 </head>
 <body>
